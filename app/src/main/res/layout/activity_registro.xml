@@ -19,6 +19,29 @@
         app:layout_constraintHorizontal_bias="0.443"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <!-- Input: Nombre -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputName"
+        style="@style/Widget.Material3.TextInputLayout.FilledBox.Dense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Nombre"
+        app:helperText="Ingrese su nombre"
+        app:boxBackgroundMode="filled"
+        app:boxBackgroundColor="?attr/colorSurfaceContainerHighest"
+        app:boxStrokeColor="?attr/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/imageView3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="40dp"
+        android:minWidth="300dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inputName"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Input con label y supporting text -->
     <com.google.android.material.textfield.TextInputLayout
@@ -30,11 +53,11 @@
         app:helperText="Escriba su mail"
         app:boxBackgroundMode="filled"
         app:boxBackgroundColor="?attr/colorSurfaceContainerHighest"
-        app:boxStrokeColor="?attr/colorPrimary"
-        app:layout_constraintTop_toBottomOf="@id/imageView3"
+        app:boxStrokeColor="@color/custom_indicator_color"
+        app:layout_constraintTop_toBottomOf="@id/textInputName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="24dp"
         android:minWidth="300dp">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -55,7 +78,7 @@
         app:helperText="Ingrese su contraseña"
         app:boxBackgroundMode="filled"
         app:boxBackgroundColor="?attr/colorSurfaceContainerHighest"
-        app:boxStrokeColor="?attr/colorPrimary"
+        app:boxStrokeColor="@color/custom_indicator_color"
         app:endIconMode="password_toggle"
         app:layout_constraintTop_toBottomOf="@id/textInputMail"
         app:layout_constraintStart_toStartOf="parent"
@@ -79,7 +102,7 @@
         app:helperText="Ingrese su contraseña"
         app:boxBackgroundMode="filled"
         app:boxBackgroundColor="?attr/colorSurfaceContainerHighest"
-        app:boxStrokeColor="?attr/colorPrimary"
+        app:boxStrokeColor="@color/custom_indicator_color"
         app:endIconMode="password_toggle"
         app:layout_constraintTop_toBottomOf="@id/textInputPassword"
         app:layout_constraintStart_toStartOf="parent"
@@ -94,5 +117,17 @@
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
-
+    <!-- Botón: Crear cuenta -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Crear cuenta"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="40dp"
+        app:cornerRadius="24dp"
+        app:backgroundTint="@color/custom_indicator_color"
+        app:layout_constraintTop_toBottomOf="@id/textInputConfirmPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

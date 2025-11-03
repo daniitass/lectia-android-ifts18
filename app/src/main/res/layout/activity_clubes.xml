@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
+    tools:context=".ClubesActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Título -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Club de lectura"
+            android:textAppearance="?attr/textAppearanceHeadlineMedium"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"/>
+
+        <!-- Campo de búsqueda -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputSearch"
+            style="@style/Widget.Material3.TextInputLayout.FilledBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombre, Autor, Editorial"
+            app:startIconDrawable="@drawable/ic_search_24"
+            app:boxBackgroundMode="filled"
+            app:boxBackgroundColor="?attr/colorSurfaceContainerHighest"
+            android:layout_marginTop="12dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Lista de clubes -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerClubes"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="12dp"
+            tools:listitem="@layout/item_club_card"/>
+    </LinearLayout>
+
+    <!-- Botón flotante “+” -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddClub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="Agregar club"
+        app:srcCompat="@drawable/ic_add_24"
+        app:tint="@android:color/white"
+        app:backgroundTint="@color/custom_indicator_color"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"/>
+
+    <!-- Barra inferior -->
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/bottomNavigation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:singleSelection="true"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="16dp"
+        android:background="?attr/colorSurfaceContainerHigh">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnClubes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Clubes"
+            app:checked="true"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnMisClubes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mis Clubes"
+            />
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

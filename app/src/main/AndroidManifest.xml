@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Lectia">
         <activity
+            android:name=".ClubesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CrearClubActivity"
+            android:exported="false" />
+        <activity
             android:name=".LogActivity"
             android:exported="false" />
         <activity
