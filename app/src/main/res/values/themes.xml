@@ -1,9 +1,18 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.Lectia" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/color_botones</item>
+        <item name="colorOnPrimary">@color/color_card</item>
+
     </style>
 
     <style name="Theme.Lectia" parent="Base.Theme.Lectia" />
+
+    <!-- Color dorado de las estrellitas -->
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@android:color/darker_gray</item>
+        <item name="colorControlActivated">#FFC107</item>
+        >
+    </style>
+
 </resources>

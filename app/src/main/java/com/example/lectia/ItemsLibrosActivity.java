@@ -1,9 +1,6 @@
 package com.example.lectia;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,33 +8,17 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class LogActivity extends AppCompatActivity {
-
+public class ItemsLibrosActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_log);
+        setContentView(R.layout.item_book);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        Button btnIngresar = findViewById(R.id.materialButton);
-
-        // Asignar acción al hacer clic
-        btnIngresar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Código a ejecutar al hacer clic
-                Intent intent = new Intent(LogActivity.this, MenuActivity.class);
-
-                // 5. Inicia la nueva actividad usando el Intent.
-                startActivity(intent);
-            }
-        });
     }
-
-
 }
