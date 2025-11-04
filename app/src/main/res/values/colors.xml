@@ -2,6 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="custom_indicator_color">#326273</color>
+    <color name="color_botones">#326273</color>
+    <color name="color_card">#5C9EAD</color>
     <color name="neutral_variant_70">#B3B3B3</color>
 </resources>

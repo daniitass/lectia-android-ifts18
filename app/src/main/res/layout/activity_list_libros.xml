@@ -16,7 +16,7 @@
         android:layout_marginTop="24dp"
         android:gravity="center"
         android:text="LIBROS"
-        android:textColor="@color/custom_indicator_color"
+        android:textColor="@color/color_botones"
         android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

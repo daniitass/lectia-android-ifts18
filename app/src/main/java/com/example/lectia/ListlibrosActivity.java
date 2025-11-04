@@ -45,10 +45,9 @@ public class ListlibrosActivity extends AppCompatActivity {
         fetchNewestSpanishBooks();
     }
 
-    // ✅ 2. Nuevo método para la búsqueda inicial.
+    // ✅ 2. Este es el método para la búsqueda inicial.
     private void fetchNewestSpanishBooks() {
         // Usamos "libros" como término genérico para obtener una buena base de resultados.
-        // La magia está en el parámetro "newest" que ordenará los resultados.
         fetchBooks("literatura", null, null);
     }
 
@@ -76,8 +75,8 @@ public class ListlibrosActivity extends AppCompatActivity {
             }
         });
     }
+    //Conectar la API con el código
 
-    // ✅ 4. El método fetchBooks ahora es más flexible.
     private void fetchBooks(String query, String langCode, String orderBy) {
         Log.d("API_CALL", "Buscando - Query: '" + query + "', Lang: '" + langCode + "', OrderBy: '" + orderBy + "'");
         Toast.makeText(this, "Buscando libros...", Toast.LENGTH_SHORT).show();

@@ -27,6 +27,7 @@
         android:layout_height="wrap_content"
         android:hint="Bienvenido/a Jessica!"
         android:textSize="50dp"
+        android:textColor="@color/black"
         android:textAlignment="center"
         app:layout_constraintTop_toBottomOf="@+id/FotoPerfil"
         app:layout_constraintStart_toStartOf="parent"
