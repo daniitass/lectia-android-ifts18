@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="24dp"
-    tools:context=".RegisterActivity"> <!-- este layout se usa en la clase RegisterActivity.java -->
+    tools:context=".RegisterActivity">
 
     <!-- Logo -->
     <ImageView
@@ -16,83 +16,103 @@
         android:layout_marginTop="72dp"
         android:src="@drawable/logo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.443"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Input con label y supporting text -->
+    <!-- 1. Campo de Mail -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputMail"
         style="@style/Widget.Material3.TextInputLayout.FilledBox.Dense"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Mail"
         app:helperText="Escriba su mail"
-        app:boxBackgroundMode="filled"
-        app:boxBackgroundColor="?attr/colorSurfaceContainerHighest"
-        app:boxStrokeColor="?attr/colorPrimary"
         app:layout_constraintTop_toBottomOf="@id/imageView3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="40dp"
-        android:minWidth="300dp">
+        android:layout_marginTop="40dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/inputMail"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:importantForAutofill="no"
-            android:autofillHints="" />
+            android:inputType="textEmailAddress"/>
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- 2. Campo de Nombre de Usuario (AHORA EN SU SITIO Y CON RESTRICCIONES) -->
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputPassword"
+        android:id="@+id/layoutNombreUsuario"
         style="@style/Widget.Material3.TextInputLayout.FilledBox.Dense"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Contraseña"
-        app:helperText="Ingrese su contraseña"
-        app:boxBackgroundMode="filled"
-        app:boxBackgroundColor="?attr/colorSurfaceContainerHighest"
-        app:boxStrokeColor="?attr/colorPrimary"
-        app:endIconMode="password_toggle"
+        android:hint="Nombre de usuario"
+        app:helperText="Elige un nombre para tu perfil"
         app:layout_constraintTop_toBottomOf="@id/textInputMail"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp"
-        android:minWidth="300dp">
+        android:layout_marginTop="24dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputPassword"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputConfirmPassword"
-        style="@style/Widget.Material3.TextInputLayout.FilledBox.Dense"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/inputNombreUsuario"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Confirmar contraseña"
-        app:helperText="Ingrese su contraseña"
-        app:boxBackgroundMode="filled"
-        app:boxBackgroundColor="?attr/colorSurfaceContainerHighest"
-        app:boxStrokeColor="?attr/colorPrimary"
-        app:endIconMode="password_toggle"
-        app:layout_constraintTop_toBottomOf="@id/textInputPassword"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp"
-        android:minWidth="300dp">
+        android:inputType="textPersonName" />
+</com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputConfirmPassword"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword" />
+
+    <!-- 3. Campo de Contraseña -->
+<com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/textInputPassword"
+    style="@style/Widget.Material3.TextInputLayout.FilledBox.Dense"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:hint="Contraseña"
+    app:helperText="Ingrese su contraseña"
+    app:endIconMode="password_toggle"
+    app:layout_constraintTop_toBottomOf="@id/layoutNombreUsuario"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:layout_marginTop="24dp">
+
+<com.google.android.material.textfield.TextInputEditText
+android:id="@+id/inputPassword"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- 4. Campo de Confirmar Contraseña -->
+<com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/textInputConfirmPassword"
+    style="@style/Widget.Material3.TextInputLayout.FilledBox.Dense"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:hint="Confirmar contraseña"
+    app:helperText="Ingrese su contraseña nuevamente"
+    app:endIconMode="password_toggle"
+    app:layout_constraintTop_toBottomOf="@id/textInputPassword"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:layout_marginTop="24dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+<com.google.android.material.textfield.TextInputEditText
+android:id="@+id/inputConfirmPassword"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:inputType="textPassword" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- 5. Botón de Registrarse -->
+<com.google.android.material.button.MaterialButton
+    android:id="@+id/button_register"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="32dp"
+    android:text="Registrarse"
+    android:paddingTop="12dp"
+    android:paddingBottom="12dp"
+    app:layout_constraintTop_toBottomOf="@id/textInputConfirmPassword"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>

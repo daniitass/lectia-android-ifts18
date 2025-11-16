@@ -1,4 +1,4 @@
-<!-- Archivo: res/layout/item_libro.xml -->
+<!-- Archivo: res/layout/item_book.xml -->
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,43 +7,54 @@
     android:layout_margin="8dp"
     app:cardElevation="4dp"
     app:cardCornerRadius="8dp"
-    android:id="@+id/main"
-    android:background="@color/color_card">
+    app:cardBackgroundColor="@color/color_card"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"> <!-- Efecto visual de clic -->
 
+    <!-- ✅ ESTE LAYOUT NO NECESITA DUPLICATEPARENTSTATE PORQUE ES HIJO DIRECTO DE LA CARD -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="16dp"/>
+        android:padding="12dp"
+        android:gravity="center_vertical"
+        android:duplicateParentState="true">
 
-        <!-- Imagen del libro -->
+        <!-- ✅ AÑADIDO duplicateParentState -->
         <ImageView
             android:id="@+id/imageViewBookCover"
             android:layout_width="80dp"
             android:layout_height="120dp"
             android:scaleType="centerCrop"
-            android:contentDescription="Portada del libro" />
+            android:contentDescription="Portada del libro"
+            android:duplicateParentState="true" />
 
+        <!-- ✅ AÑADIDO duplicateParentState -->
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="vertical"
-            android:gravity="center"
             android:layout_marginStart="16dp"
-            >
+            android:gravity="center_horizontal"
+            android:duplicateParentState="true">
 
-
+            <!-- ✅ AÑADIDO duplicateParentState -->
             <TextView
                 android:id="@+id/textViewTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Título del Libro"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                android:maxLines="2"
-                />
+                android:textColor="?android:attr/textColorPrimary"
+                android:maxLines="3"
+                android:textAlignment="center"
+                android:ellipsize="end"
+                android:duplicateParentState="true" />
 
-
+            <!-- ✅ AÑADIDO duplicateParentState -->
             <TextView
                 android:id="@+id/textViewAuthors"
                 android:layout_width="wrap_content"
@@ -51,9 +62,14 @@
                 android:layout_marginTop="4dp"
                 android:text="Autor del Libro"
                 android:textSize="14sp"
-                android:maxLines="1"
-                />
+                android:textColor="?android:attr/textColorSecondary"
+                android:maxLines="2"
+                android:textAlignment="center"
+                android:ellipsize="end"
+                android:duplicateParentState="true" />
 
         </LinearLayout>
+
+    </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

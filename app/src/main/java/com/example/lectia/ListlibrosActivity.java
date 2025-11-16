@@ -52,30 +52,49 @@ public class ListlibrosActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView() {
-        bookAdapter = new BookAdapter(this);
+        bookAdapter = new BookAdapter();
         recyclerViewLibros.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewLibros.setAdapter(bookAdapter);
     }
 
+// Dentro de ListlibrosActivity.java
+
     private void setupSearchView() {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
+            /**
+             * Se llama cuando el usuario presiona el botón de búsqueda o la tecla "Enter".
+             */        @Override
             public boolean onQueryTextSubmit(String query) {
+                // 1. Comprobamos que la búsqueda no está vacía
                 if (query != null && !query.trim().isEmpty()) {
-                    // ✅ 3. Búsqueda manual: busca por relevancia (orderBy = null).
+                    // 2. Llamamos a nuestro método 'fetchBooks' con la consulta del usuario.
+                    //    Pasamos 'null' a langCode y orderBy para una búsqueda general por relevancia.
                     fetchBooks(query, null, null);
+
+                    // 3. Ocultamos el teclado para que el usuario vea los resultados
                     searchView.clearFocus();
                 }
-                return true;
+                return true; // Indicamos que hemos manejado la acción
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                return false;
+                return false; // No hacemos nada aquí
+            }
+        });
+
+        // BONUS: Restaurar la lista original cuando el usuario cierra la búsqueda
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                // Cuando el usuario cierra el SearchView (presionando la 'X'),
+                // volvemos a cargar la lista de libros más nuevos.
+                fetchNewestSpanishBooks();
+                return false; // Permite que el SearchView se cierre normalmente
             }
         });
     }
-    //Conectar la API con el código
+
 
     private void fetchBooks(String query, String langCode, String orderBy) {
         Log.d("API_CALL", "Buscando - Query: '" + query + "', Lang: '" + langCode + "', OrderBy: '" + orderBy + "'");
@@ -91,15 +110,15 @@ public class ListlibrosActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     if (response.body().getItems() != null && !response.body().getItems().isEmpty()) {
                         Log.d("API_CALL", "Éxito: Se encontraron " + response.body().getItems().size() + " libros.");
-                        bookAdapter.submitList(response.body().getItems());
+                        bookAdapter.setBooks(response.body().getItems());
                     } else {
                         Log.w("API_CALL", "Éxito, pero no se encontraron libros para la consulta: " + query);
-                        bookAdapter.submitList(Collections.emptyList());
+                        bookAdapter.setBooks(Collections.emptyList());
                         Toast.makeText(ListlibrosActivity.this, "No se encontraron resultados", Toast.LENGTH_LONG).show();
                     }
                 } else {
                     Log.e("API_CALL", "Error en la respuesta del servidor: " + response.message());
-                    bookAdapter.submitList(Collections.emptyList());
+                    bookAdapter.setBooks(Collections.emptyList());
                     Toast.makeText(ListlibrosActivity.this, "Error en la respuesta: " + response.code(), Toast.LENGTH_LONG).show();
                 }
             }
@@ -107,7 +126,7 @@ public class ListlibrosActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<BookResponse> call, Throwable t) {
                 Log.e("API_CALL", "Fallo en la llamada a la API", t);
-                bookAdapter.submitList(Collections.emptyList());
+                bookAdapter.setBooks(Collections.emptyList());
                 Toast.makeText(ListlibrosActivity.this, "Error de red. Revisa tu conexión.", Toast.LENGTH_LONG).show();
             }
         });

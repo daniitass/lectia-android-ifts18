@@ -8,19 +8,20 @@ import retrofit2.http.Query;
 public interface GoogleBooksService {
 
     // Método para la búsqueda INICIAL (con todos los filtros)
-    @GET("volumes")
+    @GET("volumes?fields=items(id,volumeInfo(title,authors,description,imageLinks(smallThumbnail,thumbnail)))")
     Call<BookResponse> getNewestBooks(
             @Query("q") String query,
             @Query("orderBy") String orderBy,
-            @Query("langRestrict") String lang,
+            @Query("langRestrict") String langCode,
             @Query("key") String apiKey
     );
-
     // Método para la búsqueda del USUARIO (sin orderBy y sin langRestrict)
     @GET("volumes")
     Call<BookResponse> searchBooks(
             @Query("q") String query,
-            @Query("key") String apiKey
+            @Query("key") String apiKey,
+            @Query("fields") String fields,
+            @Query("maxResults") int maxResults
     );
 }
 

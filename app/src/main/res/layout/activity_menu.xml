@@ -1,82 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".MenuActivity"
-    >
+    android:padding="24dp"
+    tools:context=".MenuActivity">
 
+  <!-- 1. Foto de Perfil -->
   <com.google.android.material.imageview.ShapeableImageView
-      android:id="@+id/FotoPerfil"
+      android:id="@+id/ivFotoPerfil"
+      android:layout_width="150dp"
+      android:layout_height="150dp"
+      android:layout_marginTop="60dp"
+      android:padding="4dp"
+      android:src="@drawable/perfil"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
+      app:strokeColor="?attr/colorPrimary"
+      app:strokeWidth="2dp" />
+
+  <ImageButton
+      android:id="@+id/btnEditarFoto"
+      android:layout_width="48dp"
+      android:layout_height="48dp"
+      android:src="@drawable/configuracion"
+      android:background="@android:color/transparent"
+      android:scaleType="center"
+      app:layout_constraintCircle="@+id/ivFotoPerfil"
+      app:layout_constraintCircleAngle="135"
+      app:layout_constraintCircleRadius="75dp"
+      app:tint="@android:color/black"
+      tools:ignore="ContentDescription,MissingConstraints,SpeakableTextPresentCheck" />
+
+
+
+  <!-- 3. TextView del Saludo -->
+  <TextView
+      android:id="@+id/tvSaludo"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="24dp"
+      android:textAlignment="center"
+      android:textColor="@color/black"
+      android:textSize="32sp"
+      android:textStyle="bold"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/ivFotoPerfil"
+      tools:text="¡Bienvenido/a, Jessica!" />
+
+  <!-- 4. Frase del Menú -->
+  <TextView
+      android:id="@+id/fraseMenu"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:text="¡Qué bueno verte hoy! Cuanto más leas, más sabrás"
+      android:textAlignment="center"
+      android:textSize="20sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/tvSaludo" />
+
+  <!-- Guideline para alinear los botones de abajo -->
+  <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/guideline_vertical"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:src="@drawable/perfil"
-      android:minHeight="150dp"
-      android:minWidth="150dp"
-      app:layout_constraintTop_toBottomOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      android:layout_marginTop="110dp"
-      android:layout_marginLeft="125dp"
-      />
+      android:orientation="vertical"
+      app:layout_constraintGuide_percent="0.5"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Bienvenido/a Jessica!"
-        android:textSize="50dp"
-        android:textColor="@color/black"
-        android:textAlignment="center"
-        app:layout_constraintTop_toBottomOf="@+id/FotoPerfil"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="300dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        />
-
-    <TextView
-        android:id="@+id/fraseMenu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="¡Que bueno verte hoy! Cuanto más leas, más sabrás"
-        android:textSize="30dp"
-        android:textAlignment="center"
-        app:layout_constraintTop_toBottomOf="@+id/FotoPerfil"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="450dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        />
-
+  <!-- 5. Botón Buscar Libros -->
   <com.google.android.material.button.MaterialButton
       android:id="@+id/btnLibros"
-      android:layout_width="140dp"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
+      android:layout_marginEnd="8dp"
       android:text="Buscar Libros"
-      app:layout_constraintTop_toBottomOf="@+id/fraseMenu"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintBottom_toBottomOf="parent"
-      android:layout_marginTop="600dp"
-      android:layout_marginLeft="40dp"
-      />
+      app:layout_constraintEnd_toStartOf="@id/guideline_vertical"
+      app:layout_constraintStart_toStartOf="parent" />
 
+  <!-- 6. Botón Buscar Club -->
   <com.google.android.material.button.MaterialButton
-      android:id="@+id/Clubes"
-      android:layout_width="140dp"
+      android:id="@+id/btnClubes"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
       android:text="Buscar Club"
-      app:layout_constraintTop_toBottomOf="@+id/fraseMenu"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintBottom_toBottomOf="parent"
-      android:layout_marginTop="600dp"
-      android:layout_marginRight="40dp"
-      android:layout_marginLeft="230dp"
-      />
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@id/guideline_vertical" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,15 +1,14 @@
-// Archivo: model/BookItem.java
+
 package com.example.lectia.model;
 
-import com.google.gson.annotations.SerializedName;
+import java.io.Serializable;
 
-public class BookItem {
-
-    @SerializedName("volumeInfo")
+public class BookItem implements Serializable {
+    private String id;
     private VolumeInfo volumeInfo;
 
-    public VolumeInfo getVolumeInfo() {
-        return volumeInfo;
-    }
+    // Getters y Setters...
+    public String getId() { return id; }
+    public VolumeInfo getVolumeInfo() { return volumeInfo; }
 }
 

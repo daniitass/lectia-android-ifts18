@@ -3,7 +3,9 @@ package com.example.lectia.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ImageLinks {
+import java.io.Serializable;
+
+public class ImageLinks implements Serializable {
 
     // Nombres de variables que coinciden con el JSON de la API
     @SerializedName("thumbnail")
