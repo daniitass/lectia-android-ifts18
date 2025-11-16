@@ -32,6 +32,12 @@
             android:name=".ListlibrosActivity"
             android:exported="false" />
         <activity
+            android:name=".ClubesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CrearClubActivity"
+            android:exported="false" />
+        <activity
             android:name=".LogActivity"
             android:exported="false" />
         <activity
