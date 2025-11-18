@@ -29,7 +29,7 @@
         android:layout_height="80dp"
         android:layout_marginTop="24dp"
         android:contentDescription="Seleccionar imagen"
-        android:src="@drawable/ic_person_24"
+        android:src="@drawable/icono_imagen"
         android:scaleType="centerInside"
         app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium"
         android:backgroundTint="?attr/colorSurfaceVariant"

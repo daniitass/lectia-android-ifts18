@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+
+    <!-- Color de fondo del círculo -->
+    <solid android:color="@color/color_botones" />
+
+    <!-- Tamaño del círculo. Lo forzamos a ser igual de ancho que de alto -->
+    <size
+        android:width="48dp"
+        android:height="48dp" />
+
+</shape>

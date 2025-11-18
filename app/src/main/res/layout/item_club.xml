@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp">
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:gravity="center_vertical">  <!--  Añadido para alinear todo al centro verticalmente -->
 
         <ImageView
             android:id="@+id/imagenClub"
@@ -41,6 +45,25 @@
                 android:textColor="?android:attr/textColorSecondary" />
         </LinearLayout>
 
-    </LinearLayout>
+        <ImageButton
+            android:id="@+id/btnJoinClub"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/button_round_green"
+            android:contentDescription="@string/unirse_al_club"
+            android:padding="12dp"
+            android:scaleType="fitCenter"
 
+
+            app:srcCompat="@drawable/icono_add"
+            app:tint="@android:color/white"
+
+            tools:background="@drawable/button_round_green"
+            tools:tint="@android:color/white" />
+
+
+
+
+    </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

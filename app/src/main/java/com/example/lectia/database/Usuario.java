@@ -1,62 +1,65 @@
-// EN: Usuario.java
-package com.example.lectia.database;
+package com.example.lectia.database; // Asegúrate que el paquete es el correcto
 
-import androidx.annotation.NonNull;
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "usuarios")
 public class Usuario {
 
     @PrimaryKey(autoGenerate = true)
-    private int IDUsuario;
-
-    // --- CORRECCIÓN CLAVE ---
-    // Todas las variables que son columnas en la BD necesitan la anotación @ColumnInfo.
-
-    @NonNull
-    @ColumnInfo(name = "email") // La columna se llamará 'email'
+    private int id;
+    private String nombre;
     private String email;
-
-    @NonNull
-    @ColumnInfo(name = "password") // La columna se llamará 'password'
     private String password;
+    // Si tienes un campo para el ID de Google, por ejemplo:
+    // private String googleId;
 
-    @ColumnInfo(name = "nombre_usuario") // La columna se llamará 'nombre_usuario'
-    private String nombreUsuario;
-
-    @ColumnInfo(name = "foto_perfil") // La columna se llamará 'foto_perfil'
-    private String fotoPerfil;
-
-
-    // --- Constructor Corregido ---
-    // Los nombres de los parámetros ahora coinciden con los nombres de las variables de la clase.
-    public Usuario(@NonNull String email, @NonNull String password, String nombreUsuario, String fotoPerfil) {
-        this.email = email;
-        this.password = password;
-        this.nombreUsuario = nombreUsuario;
-        this.fotoPerfil = fotoPerfil;
+    // --- CONSTRUCTOR VACÍO (necesario para Room) ---
+    public Usuario() {
     }
 
+    // --- CONSTRUCTOR PARA USAR NOSOTROS (Room lo ignora) ---
+    // Este constructor debe tener TODOS tus campos
+    @Ignore
+    public Usuario(int id, String nombre, String email) {
+        this.id = id;
+        this.nombre = nombre;
+        this.email = email;
+        this.password = password;
+        // Si añadiste googleId: this.googleId = googleId;
+    }
 
-    // --- Getters Corregidos ---
-    // Los nombres de los métodos ahora son consistentes (getEmail en lugar de getMail).
-    public int getIDUsuario() { return IDUsuario; }
+    // --- GETTERS Y SETTERS PARA TODOS LOS CAMPOS ---
 
-    @NonNull
-    public String getEmail() { return email; }
+    public int getId() {
+        return id;
+    }
 
-    @NonNull
-    public String getPassword() { return password; }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    public String getNombreUsuario() { return nombreUsuario; }
+    public String getNombre() {
+        return nombre;
+    }
 
-    public String getFotoPerfil() { return fotoPerfil; }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
+    public String getEmail() {
+        return email;
+    }
 
-    // --- Setter para el ID ---
-    // Room necesita este setter para poder asignar el ID autogenerado.
-    public void setIDUsuario(int IDUsuario) { this.IDUsuario = IDUsuario; }
-}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }}
