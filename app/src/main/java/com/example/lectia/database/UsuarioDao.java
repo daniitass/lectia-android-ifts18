@@ -21,9 +21,12 @@ public interface UsuarioDao {
     void actualizarUsuario(Usuario usuario);
 
     //Buscar Usuario Por Mail
-    // EN: UsuarioDao.java (VERSIÓN CORRECTA)
     @Query("SELECT * FROM usuarios WHERE email = :email LIMIT 1")
     Usuario findByEmail(String email);
+
+    //Buscar Usuario por ID
+    @Query("SELECT * FROM usuarios WHERE id = :id LIMIT 1")
+    Usuario findById(int id);
 
 
     // @Query("DELETE FROM usuarios WHERE IDUsuario = :id")

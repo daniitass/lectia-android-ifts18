@@ -1,9 +1,11 @@
 package com.example.lectia;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -11,10 +13,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
-
 import com.bumptech.glide.Glide;
 import com.example.lectia.database.Club;
+
+import java.util.List;
 
 public class ClubAdapter extends RecyclerView.Adapter<ClubAdapter.ClubViewHolder> {
 
@@ -43,6 +45,19 @@ public class ClubAdapter extends RecyclerView.Adapter<ClubAdapter.ClubViewHolder
         Glide.with(context)
                 .load(club.getImagenPath())
                 .into(holder.imagenClub);
+
+        holder.btnJoinClub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, DetallesClubActivity.class);
+                intent.putExtra("clubId", club.getId());
+                intent.putExtra("nombreClub", club.getNombre());
+                intent.putExtra("descripcionClub", club.getDescripcion());
+                // Añadido: Pasamos también la ruta de la imagen
+                intent.putExtra("imagenClubPath", club.getImagenPath());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -55,12 +70,14 @@ public class ClubAdapter extends RecyclerView.Adapter<ClubAdapter.ClubViewHolder
         ImageView imagenClub;
         TextView textNombreClub;
         TextView textDescripcionClub;
+        ImageButton btnJoinClub;
 
         public ClubViewHolder(@NonNull View itemView) {
             super(itemView);
             imagenClub = itemView.findViewById(R.id.imagenClub);
             textNombreClub = itemView.findViewById(R.id.textNombreClub);
             textDescripcionClub = itemView.findViewById(R.id.textDescripcionClub);
+            btnJoinClub = itemView.findViewById(R.id.btnJoinClub);
         }
     }
 }
