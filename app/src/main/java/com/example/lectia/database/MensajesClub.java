@@ -1,70 +1,67 @@
-// Ruta: app/src/main/java/com/example/lectia/database/Mensaje.java
 package com.example.lectia.database;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 import androidx.annotation.NonNull;
 
-// Definimos la tabla y sus relaciones con las otras dos.
 @Entity(tableName = "mensajes",
-        // Aquí declaramos las "Claves Foráneas" (Foreign Keys).
-        // Son las reglas que conectan esta tabla con las otras.
         foreignKeys = {
-                // Relación 1: Conecta 'IDClub' de esta tabla con 'IDClub' de la tabla 'clubes'.
                 @ForeignKey(entity = Club.class,
-                        parentColumns = "IDClub", // Campo en la tabla padre (Club)
-                        childColumns = "IDClub",    // Campo en esta tabla (Mensaje)
-                        onDelete = ForeignKey.CASCADE), // Si se borra un club, se borran todos sus mensajes.
-
-                // Relación 2: Conecta 'IDUsuario' de esta tabla con 'IDUsuario' de la tabla 'usuarios'.
+                        parentColumns = "id",
+                        childColumns = "clubId",
+                        onDelete = ForeignKey.CASCADE),
                 @ForeignKey(entity = Usuario.class,
-                        parentColumns = "IDUsuario", // Campo en la tabla padre (Usuario)
-                        childColumns = "IDUsuario",    // Campo en esta tabla (Mensaje)
-                        onDelete = ForeignKey.SET_NULL) // Opción: Si un usuario se borra, el mensaje no se borra,
-                // pero su autoría queda como 'nula' o anónima.
-                // Podríamos usar CASCADE si preferimos que se borren.
+                        parentColumns = "id",
+                        childColumns = "usuarioId",
+                        onDelete = ForeignKey.SET_NULL)
         },
-        // Los índices hacen que las búsquedas por ID de club o usuario sean mucho más rápidas.
-        indices = {@Index("IDClub"), @Index("IDUsuario")}
+        indices = {@Index("clubId"), @Index("usuarioId")}
 )
 public class MensajesClub {
 
     @PrimaryKey(autoGenerate = true)
-    private int IDMensaje; // Identificador único para cada mensaje.
+    private int id;
 
     @NonNull
-    private String Contenido; // El texto del mensaje.
+    private String contenido;
 
-    private long Timestamp; // La fecha/hora en que se envió el mensaje.
-    // Se guarda como 'long' (milisegundos desde 1970), que es muy eficiente.
+    private long timestamp;
 
-    // --- Campos de Relación (Claves Foráneas) ---
+    // Nuevo campo para la ruta de la imagen del comentario
+    private String imagenPath;
 
-    // Este campo guarda el ID del club al que pertenece el mensaje.
-    private int IDClub;
+    @ColumnInfo(name = "clubId")
+    private int clubId;
 
-    // Este campo guarda el ID del usuario que envió el mensaje.
-    // Usamos 'Integer' en lugar de 'int' para permitir que sea nulo (por la regla onDelete = SET_NULL).
-    private Integer IDUsuario;
+    @ColumnInfo(name = "usuarioId")
+    private Integer usuarioId;
 
-    // --- Constructor ---
-    public MensajesClub(@NonNull String Contenido, long Timestamp, int IDClub, Integer IDUsuario) {
-        this.Contenido = Contenido;
-        this.Timestamp = Timestamp;
-        this.IDClub = IDClub;
-        this.IDUsuario = IDUsuario;
+    // --- Constructor Actualizado ---
+    public MensajesClub(@NonNull String contenido, long timestamp, int clubId, Integer usuarioId, String imagenPath) {
+        this.contenido = contenido;
+        this.timestamp = timestamp;
+        this.clubId = clubId;
+        this.usuarioId = usuarioId;
+        this.imagenPath = imagenPath;
     }
 
     // --- Getters ---
-    public int getIDMensaje() { return IDMensaje; }
+    public int getId() { return id; }
     @NonNull
-    public String getContenido() { return Contenido; }
-    public long getTimestamp() { return Timestamp; }
-    public int getIDClub() { return IDClub; }
-    public Integer getIDUsuario() { return IDUsuario; }
+    public String getContenido() { return contenido; }
+    public long getTimestamp() { return timestamp; }
+    public int getClubId() { return clubId; }
+    public Integer getUsuarioId() { return usuarioId; }
+    public String getImagenPath() { return imagenPath; }
 
-    // --- Setter para el ID (Room lo necesita) ---
-    public void setIDMensaje(int IDMensaje) { this.IDMensaje = IDMensaje; }
+    // --- Setters (Room los necesita) ---
+    public void setId(int id) { this.id = id; }
+    public void setContenido(@NonNull String contenido) { this.contenido = contenido; }
+    public void setTimestamp(long timestamp) { this.timestamp = timestamp; }
+    public void setClubId(int clubId) { this.clubId = clubId; }
+    public void setUsuarioId(Integer usuarioId) { this.usuarioId = usuarioId; }
+    public void setImagenPath(String imagenPath) { this.imagenPath = imagenPath; }
 }
