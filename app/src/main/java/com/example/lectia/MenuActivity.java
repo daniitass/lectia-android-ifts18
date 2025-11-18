@@ -20,6 +20,8 @@ public class MenuActivity extends AppCompatActivity {
     private TextView tvSaludo;
     private ImageButton btnEditarFoto;
     private Button btnLibros;
+    private Button btnClubes;
+
     // Añade el botón de clubes si lo necesitas
     // private Button btnClubes;
 
@@ -33,7 +35,7 @@ public class MenuActivity extends AppCompatActivity {
         tvSaludo = findViewById(R.id.tvSaludo);
         btnEditarFoto = findViewById(R.id.btnEditarFoto);
         btnLibros = findViewById(R.id.btnLibros);
-        // btnClubes = findViewById(R.id.btnClubes);
+        btnClubes = findViewById(R.id.btnClubes);
 
         // 3. Obtener el email del usuario que pasamos desde LogActivity
         String userEmail = getIntent().getStringExtra("USER_EMAIL");
@@ -45,41 +47,49 @@ public class MenuActivity extends AppCompatActivity {
         configurarListeners();
     }
 
-    // EN: MenuActivity.java
 
     private void cargarDatosUsuario(String email) {
         // Nos aseguramos de que el email no sea nulo o vacío.
         if (email != null && !email.isEmpty()) {
 
-            // --- INICIO DE LA SOLUCIÓN ---
-            // Gracias a .allowMainThreadQueries(), podemos hacer la consulta directamente.
-            // Es más simple y no necesitamos hilos adicionales.
+            // Movemos la consulta a la base de datos a un hilo secundario
+            // para evitar que la aplicación se cierre.
+            new Thread(() -> {
+                // Realizamos la búsqueda en la base de datos DENTRO del hilo.
+                Usuario usuarioActual = LectiaDatabase.getDatabase(getApplicationContext())
+                        .usuarioDao()
+                        .findByEmail(email);
 
-            Usuario usuarioActual = LectiaDatabase.getDatabase(getApplicationContext())
-                    .usuarioDao()
-                    .findByEmail(email);
+                // Para actualizar la interfaz (como un TextView), debemos volver
+                // al hilo principal (UI Thread) usando runOnUiThread.
+                runOnUiThread(() -> {
+                    if (usuarioActual != null) {
+                        // Si encontramos al usuario, obtenemos su nombre.
+                        String nombreUsuario = usuarioActual.getNombre();
+                        // Personalizamos y mostramos el saludo.
+                        tvSaludo.setText("¡Hola, " + nombreUsuario + "!");
+                    } else {
+                        // Si por alguna razón no se encuentra, mostramos un saludo genérico.
+                        tvSaludo.setText("¡Bienvenido/a!");
+                        Toast.makeText(MenuActivity.this, "Error: no se encontró el usuario.", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
-            // Verificamos el resultado de la consulta.
-            if (usuarioActual != null) {
-                // Si encontramos al usuario, obtenemos su nombre.
-                String nombreUsuario = usuarioActual.getNombreUsuario();
-                // Personalizamos y mostramos el saludo.
-                tvSaludo.setText("¡Hola, " + nombreUsuario + "!");
-            } else {
-                // Si por alguna razón no se encuentra, mostramos un saludo genérico.
-                tvSaludo.setText("¡Bienvenido/a!");
-                Toast.makeText(MenuActivity.this, "Error: no se encontró el usuario.", Toast.LENGTH_SHORT).show();
-            }
+            }).start(); // ¡Importante! No olvides iniciar el hilo.
             // --- FIN DE LA SOLUCIÓN ---
 
         } else {
             // Si no se recibió ningún email, mostramos un saludo genérico.
+            // Esto se ejecuta de inmediato si el email es nulo.
             tvSaludo.setText("¡Bienvenido/a!");
             Toast.makeText(MenuActivity.this, "Error: no se recibió el email del usuario.", Toast.LENGTH_SHORT).show();
         }
     }
 
 
+
+
+    // En MenuActivity.java, reemplaza tu método configurarListeners con este:
 
     private void configurarListeners() {
         // Acción para el botón de editar foto
@@ -93,5 +103,12 @@ public class MenuActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-    }
-}
+        // Acción para el botón de clubes
+        if (btnClubes != null) {
+            btnClubes.setOnClickListener(v -> {
+                // Cambia "ClubesActivity.class" si tu actividad se llama diferente.
+                Intent intent = new Intent(MenuActivity.this, ClubesActivity.class);
+                startActivity(intent);
+            });
+        }
+    }}

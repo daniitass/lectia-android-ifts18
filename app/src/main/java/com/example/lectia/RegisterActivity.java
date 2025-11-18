@@ -1,4 +1,3 @@
-// EN: RegisterActivity.java
 package com.example.lectia;
 
 import android.content.Intent;
@@ -33,9 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void registrarNuevoUsuario() {
         // 1. Recoger los datos de TODOS los campos de texto
-        String mail = inputMail.getText().toString().trim();
-        // --- ESTA LÍNEA ES LA CLAVE ---
-        String nombre = inputNombreUsuario.getText().toString().trim(); // Se recoge el nombre del campo de texto.
+        String mail = inputMail.getText().toString().trim();String nombre = inputNombreUsuario.getText().toString().trim();
         String password = inputPassword.getText().toString().trim();
         String confirmPassword = inputConfirmPassword.getText().toString().trim();
 
@@ -50,26 +47,35 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-        // --- SOLUCIÓN DEFINITIVA ---
+        // --- CÓDIGO CORREGIDO ---
+        // 3. Crear el nuevo objeto Usuario usando el constructor vacío y los setters.
+        Usuario nuevoUsuario = new Usuario();
+        nuevoUsuario.setNombre(nombre);
+        nuevoUsuario.setEmail(mail);
+        nuevoUsuario.setPassword(password);
 
-        // 3. Crear el nuevo objeto Usuario USANDO EL NOMBRE RECOGIDO
-        Usuario nuevoUsuario = new Usuario(mail, password, nombre, null); // Se pasa 'nombre' al constructor.
+        new Thread(() -> { // Es buena práctica hacer las operaciones de BD en otro hilo
+            try {
+                // 4. Guardar el usuario en la base de datos usando el método INSERT.
+                // Asegúrate que en tu UsuarioDao el método se llama insert()
+                LectiaDatabase.getDatabase(getApplicationContext()).usuarioDao().registrarUsuario(nuevoUsuario);
 
-        try {
-            // 4. Guardar el usuario en la base de datos usando tu método existente
-            LectiaDatabase.getDatabase(getApplicationContext()).usuarioDao().registrarUsuario(nuevoUsuario);
+                // 5. Volver al hilo principal para mostrar el Toast y cambiar de actividad
+                runOnUiThread(() -> {
+                    Toast.makeText(RegisterActivity.this, "¡Registro exitoso! Por favor, inicia sesión.", Toast.LENGTH_LONG).show();
 
-            Toast.makeText(this, "¡Registro exitoso! Por favor, inicia sesión.", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(RegisterActivity.this, LogActivity.class);
+                    startActivity(intent);
+                    finish(); // Cerramos la actividad de registro
+                });
 
-            // Llevamos al usuario a la pantalla de Login
-            Intent intent = new Intent(RegisterActivity.this, LogActivity.class);
-            startActivity(intent);
-            finish(); // Cerramos la actividad de registro
-
-        } catch (Exception e) {
-            // Este error puede saltar si el email ya existe, gracias a 'OnConflictStrategy.IGNORE'
-            Toast.makeText(this, "El email ya está registrado o hubo un error.", Toast.LENGTH_LONG).show();
-        }
+            } catch (Exception e) {
+                // Este error puede saltar si el email ya existe.
+                runOnUiThread(() -> {
+                    Toast.makeText(RegisterActivity.this, "El email ya está registrado o hubo un error.", Toast.LENGTH_LONG).show();
+                });
+            }
+        }).start();
     }
-}
 
+}

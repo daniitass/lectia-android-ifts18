@@ -6,11 +6,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+
+import com.bumptech.glide.Glide;
+import com.example.lectia.database.Club;
 
 public class ClubAdapter extends RecyclerView.Adapter<ClubAdapter.ClubViewHolder> {
 
@@ -34,7 +38,11 @@ public class ClubAdapter extends RecyclerView.Adapter<ClubAdapter.ClubViewHolder
         Club club = clubes.get(position);
         holder.textNombreClub.setText(club.getNombre());
         holder.textDescripcionClub.setText(club.getDescripcion());
-        holder.imagenClub.setImageResource(club.getImagen());
+        String imagenPath = club.getImagenPath();
+        Toast.makeText(context, "Cargando imagen: " + imagenPath, Toast.LENGTH_LONG).show();
+        Glide.with(context)
+                .load(club.getImagenPath())
+                .into(holder.imagenClub);
     }
 
     @Override

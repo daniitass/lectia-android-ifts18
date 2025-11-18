@@ -1,43 +1,43 @@
 package com.example.lectia.database;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
-import androidx.annotation.NonNull;
 
 @Entity(tableName = "clubes")
 public class Club {
 
     @PrimaryKey(autoGenerate = true)
-    private int IDClub;
+    private int id;
+    private String nombre;
+    private String descripcion;
+    private String imagenPath;
 
-    @NonNull
-    private String NombreClub;
-
-    private String Descripcion;
-
-    // Este campo lo actualizaremos manualmente con la cuenta de miembros.
-    private int Miembros;
-
-    // Guardaremos la ruta o URL de la imagen del club.
-    private String fotoClub;
-
-    // --- Constructor ---
-    public Club(@NonNull String NombreClub, String Descripcion, int Miembros, String fotoClub) {
-        this.NombreClub = NombreClub;
-        this.Descripcion = Descripcion;
-        this.Miembros = Miembros;
-        this.fotoClub = fotoClub;
+    //AÑADE UN CONSTRUCTOR VACÍO ---
+    // Room usará este constructor para crear los objetos.
+    public Club() {
     }
 
-    // --- Getters ---
-    public int getIDClub() { return IDClub; }
-    @NonNull
-    public String getNombreClub() { return NombreClub; }
-    public String getDescripcion() { return Descripcion; }
-    public int getMiembros() { return Miembros; }
-    public String getFotoClub() { return fotoClub; }
+    //AÑADE @IGNORE AL CONSTRUCTOR ACTUAL ---
+    // Esto le dice a Room que ignore este constructor. Lo podemos
+    // usar nosotros en otras partes de la app si queremos.
+    @Ignore
+    public Club(int id, String nombre, String descripcion, String imagenPath) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.imagenPath = imagenPath;
+    }
 
-    // --- Setters (necesarios para Room) ---
-    public void setIDClub(int IDClub) { this.IDClub = IDClub; }
-    public void setMiembros(int Miembros) { this.Miembros = Miembros; }
+    // Getters
+    public int getId() { return id; }
+    public String getNombre() { return nombre; }
+    public String getDescripcion() { return descripcion; }
+    public String getImagenPath() { return imagenPath; }
+
+    // Setters (Room los necesita para el constructor vacío)
+    public void setId(int id) { this.id = id; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
+    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
+    public void setImagenPath(String imagenPath) { this.imagenPath = imagenPath; }
 }

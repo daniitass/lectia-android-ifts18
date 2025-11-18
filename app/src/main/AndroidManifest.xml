@@ -3,6 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools">
     <!-- Permitir al usuario acceder a internet para la API -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <!--Permite al usuario acceder a la galería de imágenes -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+
+    <!-- Permitir al usuario acceder a la cámara para la API -->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 
     <application
         android:allowBackup="true"
