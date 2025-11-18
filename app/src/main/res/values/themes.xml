@@ -6,4 +6,12 @@
     </style>
 
     <style name="Theme.Lectia" parent="Base.Theme.Lectia" />
+
+    <!-- Color dorado de las estrellitas -->
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@android:color/darker_gray</item>
+        <item name="colorControlActivated">#FFC107</item>
+        >
+    </style>
+
 </resources>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".MenuActivity"
+    >
+
+  <com.google.android.material.imageview.ShapeableImageView
+      android:id="@+id/FotoPerfil"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:src="@drawable/perfil"
+      android:minHeight="150dp"
+      android:minWidth="150dp"
+      app:layout_constraintTop_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      android:layout_marginTop="110dp"
+      android:layout_marginLeft="125dp"
+      />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Bienvenido/a Jessica!"
+        android:textSize="50dp"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@+id/FotoPerfil"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="300dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        />
+
+    <TextView
+        android:id="@+id/fraseMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="¡Que bueno verte hoy! Cuanto más leas, más sabrás"
+        android:textSize="30dp"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@+id/FotoPerfil"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="450dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        />
+
+  <com.google.android.material.button.MaterialButton
+      android:id="@+id/btnLibros"
+      android:layout_width="140dp"
+      android:layout_height="wrap_content"
+      android:text="Buscar Libros"
+      app:layout_constraintTop_toBottomOf="@+id/fraseMenu"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+      android:layout_marginTop="600dp"
+      android:layout_marginLeft="40dp"
+      />
+
+  <com.google.android.material.button.MaterialButton
+      android:id="@+id/Clubes"
+      android:layout_width="140dp"
+      android:layout_height="wrap_content"
+      android:text="Buscar Club"
+      app:layout_constraintTop_toBottomOf="@+id/fraseMenu"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+      android:layout_marginTop="600dp"
+      android:layout_marginRight="40dp"
+      android:layout_marginLeft="230dp"
+      />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
