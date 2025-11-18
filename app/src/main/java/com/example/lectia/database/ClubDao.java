@@ -12,23 +12,23 @@ import java.util.List;
 @Dao
 public interface ClubDao {
 
-    // Método para insertar un nuevo club.
     @Insert
     void insert(Club club);
 
-    // Método para obtener todos los clubes.
-    // Lo necesita ClubesActivity para mostrar la lista.
-    @Query("SELECT * FROM clubes") // "clubes" es el nombre de tu tabla
+    @Query("SELECT * FROM clubes")
     List<Club> getAll();
 
     @Query("SELECT * FROM clubes WHERE id = :id")
     Club getById(int id);
 
+    // --- NUEVO MÉTODO ---
+    // Busca todos los clubes cuyos IDs estén en la lista que le pasamos.
+    @Query("SELECT * FROM clubes WHERE id IN (:clubIds)")
+    List<Club> getClubsByIds(List<Integer> clubIds);
+
     @Update
     void update(Club club);
 
-    // Le dice a Room que ejecute la consulta SQL "SELECT * FROM clubs"
-    // y que el resultado lo convierta en una Lista de objetos Club.
     @Query("SELECT * FROM clubes")
     List<Club> getAllClubs();
 
