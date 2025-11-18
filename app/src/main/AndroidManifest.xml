@@ -14,17 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Lectia">
         <activity
-            android:name=".MenuActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Lectia" />
-        <activity
-            android:name=".RegisterActivity"
+            android:name=".ClubesActivity"
             android:exported="false" />
         <activity
-            android:name=".ItemsLibrosActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ListlibrosActivity"
+            android:name=".CrearClubActivity"
             android:exported="false" />
         <activity
             android:name=".LogActivity"
