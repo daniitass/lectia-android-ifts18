@@ -2,6 +2,7 @@ package com.example.lectia;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.lectia.database.Club;
+import com.example.lectia.database.LectiaDatabase;
+import com.example.lectia.database.ClubUsuarioCrossRef;
 
 import java.util.List;
 
@@ -40,23 +43,37 @@ public class ClubAdapter extends RecyclerView.Adapter<ClubAdapter.ClubViewHolder
         Club club = clubes.get(position);
         holder.textNombreClub.setText(club.getNombre());
         holder.textDescripcionClub.setText(club.getDescripcion());
-        String imagenPath = club.getImagenPath();
-        Toast.makeText(context, "Cargando imagen: " + imagenPath, Toast.LENGTH_LONG).show();
+
         Glide.with(context)
                 .load(club.getImagenPath())
                 .into(holder.imagenClub);
 
-        holder.btnJoinClub.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, DetallesClubActivity.class);
-                intent.putExtra("clubId", club.getId());
-                intent.putExtra("nombreClub", club.getNombre());
-                intent.putExtra("descripcionClub", club.getDescripcion());
-                // Añadido: Pasamos también la ruta de la imagen
-                intent.putExtra("imagenClubPath", club.getImagenPath());
-                context.startActivity(intent);
+        holder.btnJoinClub.setOnClickListener(v -> {
+            // --- 1. Lógica para unirse al club (se mantiene) ---
+            SharedPreferences sharedPreferences = context.getSharedPreferences(MenuActivity.PREFS_NAME, Context.MODE_PRIVATE);
+            int usuarioId = sharedPreferences.getInt(MenuActivity.KEY_USER_ID, -1);
+
+            if (usuarioId == -1) {
+                Toast.makeText(context, "Error: No se pudo identificar al usuario.", Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            int clubId = club.getId();
+            ClubUsuarioCrossRef join = new ClubUsuarioCrossRef(usuarioId, clubId);
+
+            new Thread(() -> {
+                LectiaDatabase.getDatabase(context.getApplicationContext()).usuarioClubDao().joinClub(join);
+            }).start();
+
+            Toast.makeText(context, "¡Te has unido a '" + club.getNombre() + "'!", Toast.LENGTH_SHORT).show();
+
+            // --- 2. Lógica para navegar a los detalles (NUEVO) ---
+            Intent intent = new Intent(context, DetallesClubActivity.class);
+            intent.putExtra("clubId", club.getId());
+            intent.putExtra("nombreClub", club.getNombre());
+            intent.putExtra("descripcionClub", club.getDescripcion());
+            intent.putExtra("imagenClubPath", club.getImagenPath());
+            context.startActivity(intent);
         });
     }
 

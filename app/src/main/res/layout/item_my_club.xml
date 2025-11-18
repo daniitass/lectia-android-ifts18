@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="12dp">
+
+            <TextView
+                android:id="@+id/clubTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lectores nocturnos"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/clubSubhead"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Subhead"/>
+        </LinearLayout>
+
+        <!-- BOTÓN DE ELIMINAR (en lugar del de unirse) -->
+        <ImageView
+            android:id="@+id/clubImage"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="8dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/club_default" />
+
+        <ImageButton
+            android:id="@+id/btn_delete_club"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Dejar club"
+            android:src="@drawable/ic_delete" 
+            app:tint="@color/black"/>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

@@ -5,13 +5,14 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-// 1. Incrementar la versión de la base de datos (de 4 a 5)
-@Database(entities = {Usuario.class, Club.class, MensajesClub.class}, version = 5)
+// 1. Corregido: Usamos el nombre de clase correcto ClubUsuarioCrossRef.class
+@Database(entities = {Usuario.class, Club.class, MensajesClub.class, ClubUsuarioCrossRef.class}, version = 6)
 public abstract class LectiaDatabase extends RoomDatabase {
 
     public abstract UsuarioDao usuarioDao();
     public abstract ClubDao clubDao();
     public abstract MensajeClubDao mensajeClubDao();
+    public abstract UsuarioClubDao usuarioClubDao();
 
     private static volatile LectiaDatabase database;
 
